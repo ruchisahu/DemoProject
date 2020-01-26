@@ -1,0 +1,13 @@
+C:\Users\sankalpg\source\repos\DemoProject\DataBase\obj\Debug\netcoreapp2.1\DataBase.csproj.CoreCompileInputs.cache
+C:\Users\sankalpg\source\repos\DemoProject\DataBase\obj\Debug\netcoreapp2.1\DataBase.RazorAssemblyInfo.cache
+C:\Users\sankalpg\source\repos\DemoProject\DataBase\obj\Debug\netcoreapp2.1\DataBase.RazorAssemblyInfo.cs
+C:\Users\sankalpg\source\repos\DemoProject\DataBase\obj\Debug\netcoreapp2.1\DataBase.AssemblyInfoInputs.cache
+C:\Users\sankalpg\source\repos\DemoProject\DataBase\obj\Debug\netcoreapp2.1\DataBase.AssemblyInfo.cs
+C:\Users\sankalpg\source\repos\DemoProject\DataBase\bin\Debug\netcoreapp2.1\DataBase.deps.json
+C:\Users\sankalpg\source\repos\DemoProject\DataBase\bin\Debug\netcoreapp2.1\DataBase.runtimeconfig.json
+C:\Users\sankalpg\source\repos\DemoProject\DataBase\bin\Debug\netcoreapp2.1\DataBase.runtimeconfig.dev.json
+C:\Users\sankalpg\source\repos\DemoProject\DataBase\bin\Debug\netcoreapp2.1\DataBase.dll
+C:\Users\sankalpg\source\repos\DemoProject\DataBase\bin\Debug\netcoreapp2.1\DataBase.pdb
+C:\Users\sankalpg\source\repos\DemoProject\DataBase\obj\Debug\netcoreapp2.1\DataBase.RazorTargetAssemblyInfo.cache
+C:\Users\sankalpg\source\repos\DemoProject\DataBase\obj\Debug\netcoreapp2.1\DataBase.dll
+C:\Users\sankalpg\source\repos\DemoProject\DataBase\obj\Debug\netcoreapp2.1\DataBase.pdb
