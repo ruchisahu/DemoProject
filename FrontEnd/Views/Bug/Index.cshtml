@@ -1,0 +1,37 @@
+﻿
+@model IEnumerable<FrontEnd.Models.Bug>
+
+@{
+    ViewData["Title"] = "Events";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+<div class="sm-6 md-4 col">
+    <div class="card">
+        <!-- <img src="~/images/2.jpg" alt="Card random image"> -->
+
+        <div class="card-body">
+            <h4 class="card-title">@Html.DisplayFor(modelItem => item.TaskId)</h4>
+            <h5 class="card-subtitle">@Html.DisplayFor(modelItem => item.TaskName), @Html.DisplayFor(modelItem => item.Status)</h5>
+            <div style="height:100px">
+                <p class="card-text">@Html.DisplayFor(modelItem => item.Severity)</p>
+            </div>
+
+            <a asp-action="Edit" asp-route-id="@item.TaskId">Edit</a> |
+            <a asp-action="Details" asp-route-id="@item.TaskId">Details</a> |
+            <a asp-action="Delete" asp-route-id="@item.TaskId">Delete</a>
+
+        </div>
+    </div>
+</div>
+
+}
+</div>

@@ -49,7 +49,7 @@ namespace BusinessLogic.Controllers
                 //returning the employee list to view  
                 return EmpInfo;
             }
-        }
+            }
 
         // GET: api/Bug/5
         [HttpGet("{id}", Name = "Get")]
