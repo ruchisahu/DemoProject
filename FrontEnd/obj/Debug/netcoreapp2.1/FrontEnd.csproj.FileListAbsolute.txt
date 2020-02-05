@@ -34,5 +34,8 @@ C:\Users\sankalpg\source\repos\DemoProject\FrontEnd\obj\Debug\netcoreapp2.1\Razo
 C:\Users\sankalpg\source\repos\DemoProject\FrontEnd\obj\Debug\netcoreapp2.1\Razor\Views\Bugs\Details.g.cshtml.cs
 C:\Users\sankalpg\source\repos\DemoProject\FrontEnd\obj\Debug\netcoreapp2.1\Razor\Views\Bugs\Edit.g.cshtml.cs
 C:\Users\sankalpg\source\repos\DemoProject\FrontEnd\obj\Debug\netcoreapp2.1\Razor\Views\Bugs\Index.g.cshtml.cs
-C:\Users\sankalpg\source\repos\DemoProject\FrontEnd\obj\Debug\netcoreapp2.1\FrontEnd.csprojAssemblyReference.cache
 C:\Users\sankalpg\source\repos\DemoProject\FrontEnd\obj\Debug\netcoreapp2.1\Razor\Views\Bug\Index.g.cshtml.cs
+C:\Users\sankalpg\source\repos\DemoProject\FrontEnd\obj\Debug\netcoreapp2.1\Razor\Views\Bug\Details.g.cshtml.cs
+C:\Users\sankalpg\source\repos\DemoProject\FrontEnd\obj\Debug\netcoreapp2.1\Razor\Views\Bug\Delete.g.cshtml.cs
+C:\Users\sankalpg\source\repos\DemoProject\FrontEnd\obj\Debug\netcoreapp2.1\FrontEnd.csprojAssemblyReference.cache
+C:\Users\sankalpg\source\repos\DemoProject\FrontEnd\obj\Debug\netcoreapp2.1\Razor\Views\Bug\Create.g.cshtml.cs
