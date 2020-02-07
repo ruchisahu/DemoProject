@@ -21,18 +21,18 @@ namespace FrontEnd.Controllers
         // GET: Bug
         public async Task<IActionResult> Index()
         {
-            List<Bug> EmpInfo = new List<Bug>();
+            List<Bug> BugInfo = new List<Bug>();
 
             using (var client = new HttpClient())
             {
-                //Passing service base url  
+              
                 client.BaseAddress = new Uri(Baseurl);
 
                 client.DefaultRequestHeaders.Clear();
-                //Define request data format  
+                
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
+                //Sending request to find web api REST service resource GetAllbug using HttpClient  
                 HttpResponseMessage Res = await client.GetAsync("api/Bug");
 
                 //Checking the response is successful or not which is sent using HttpClient  
@@ -42,11 +42,11 @@ namespace FrontEnd.Controllers
                     var EmpResponse = Res.Content.ReadAsStringAsync().Result;
 
                     //Deserializing the response recieved from web api and storing into the Employee list  
-                    EmpInfo = JsonConvert.DeserializeObject<List<Bug>>(EmpResponse);
+                    BugInfo = JsonConvert.DeserializeObject<List<Bug>>(EmpResponse);
 
                 }
                 //returning the employee list to view  
-                return View(EmpInfo);
+                return View(BugInfo);
             }
         }
 
@@ -135,55 +135,52 @@ namespace FrontEnd.Controllers
                 }
             return View(value);
         }
-     /*   public async Task<String> helperCreate(String Id, String data)
-        {
-            String response = null;
-            HttpClient client;
-            client = new HttpClient();
-            client.BaseAddress = new Uri(Baseurl);
-
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            try
-            {
-                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                HttpResponseMessage Res = await client.PostAsync("api/Bug/", content);
-
-                if (Res.IsSuccessStatusCode)
-                {
-                    response = await Res.Content.ReadAsStringAsync();
-                }
-
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Create failed with error " + ex.Message.ToString());
-            }
-
-            return response;
-        }
-        */
+    
 
         // GET: Bug/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<IActionResult> Edit(Guid? id)
         {
-            return View();
+           Bug item = new Bug();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                using (var response = await client.GetAsync("/api/Bug/" + id))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    item = JsonConvert.DeserializeObject<Bug>(apiResponse);
+                }
+            }
+            return View(item);
         }
 
         // POST: Bug/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(Guid? id, Bug bug)
         {
-            try
+            Bug receivedevent = new Bug();
+            using (var client = new HttpClient())
             {
-                // TODO: Add update logic here
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                return RedirectToAction(nameof(Index));
+                string postitem = JsonConvert.SerializeObject(bug);
+                StringContent content = new StringContent(postitem, Encoding.UTF8, "application/json");
+
+                using (var response = await client.PutAsync("/api/Bug/" + id, content))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        ViewBag.Message = apiResponse.ToString();
+                        return View("Status");
+                    }
+                  
+                    receivedevent = JsonConvert.DeserializeObject<Bug>(apiResponse);
+                }
             }
-            catch
-            {
-                return View();
-            }
+            return View(bug);
         }
 
         // GET: Bug/Delete/5
@@ -217,33 +214,7 @@ namespace FrontEnd.Controllers
             return View();
         }
 
-      /*  public async Task<String> helperDelete(Guid? Id)
-        {
-
-            String response = null;
-            HttpClient client;
-            client = new HttpClient();
-            client.BaseAddress = new Uri(Baseurl);
-
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            try
-            {
-                HttpResponseMessage Res = await client.DeleteAsync("api/Bug/" + Id);
-                if (Res.IsSuccessStatusCode)
-                {
-                    response = await Res.Content.ReadAsStringAsync();
-                }
-
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Delete failed with error " + ex.Message.ToString());
-            }
-
-            return response;
-        }
-        */
+      
 
 
 

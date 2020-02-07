@@ -30,27 +30,21 @@ namespace BusinessLogic.Controllers
 
             using (var client = new HttpClient())
             {
-                //Passing service base url  
+            
                 client.BaseAddress = new Uri(Baseurl);
-
                 client.DefaultRequestHeaders.Clear();
-                //Define request data format  
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
                 HttpResponseMessage Res = await client.GetAsync("api/Bugs");
 
-                //Checking the response is successful or not which is sent using HttpClient  
+              
                 if (Res.IsSuccessStatusCode)
-                {
-                    //Storing the response details recieved from web api   
+                { 
                     var EmpResponse = Res.Content.ReadAsStringAsync().Result;
 
-                    //Deserializing the response recieved from web api and storing into the Employee list  
                     EmpInfo = JsonConvert.DeserializeObject<List<Bug>>(EmpResponse);
 
                 }
-                //returning the employee list to view  
+               
                 return EmpInfo;
             }
             }
@@ -81,7 +75,7 @@ namespace BusinessLogic.Controllers
             }
             catch (Exception ex)
             {
-                //:todo show  eroor or shoa approrpaite view 
+                throw new Exception("getDetails failed with error " + ex.Message.ToString());
             }
 
             return Event;
@@ -167,8 +161,19 @@ namespace BusinessLogic.Controllers
 
         // PUT: api/Bug/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put(Bug bug)
         {
+            string data = JsonConvert.SerializeObject(bug);
+
+            try
+            {
+                var response = await helper.Edit(bug.TaskId.ToString(), data);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message.ToString() });
+            }
+            return Ok(bug);
         }
 
         // DELETE: api/Bug/5
