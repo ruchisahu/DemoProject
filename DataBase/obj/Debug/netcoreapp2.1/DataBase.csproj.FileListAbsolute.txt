@@ -12,3 +12,6 @@ C:\Users\sankalpg\source\repos\DemoProject\DataBase\obj\Debug\netcoreapp2.1\Data
 C:\Users\sankalpg\source\repos\DemoProject\DataBase\obj\Debug\netcoreapp2.1\DataBase.dll
 C:\Users\sankalpg\source\repos\DemoProject\DataBase\obj\Debug\netcoreapp2.1\DataBase.pdb
 C:\Users\sankalpg\source\repos\DemoProject\DataBase\obj\Debug\netcoreapp2.1\DataBase.csprojAssemblyReference.cache
+C:\Users\sankalpg\source\repos\DemoProject\DataBase\bin\Debug\netcoreapp2.1\HttpHelper.dll
+C:\Users\sankalpg\source\repos\DemoProject\DataBase\bin\Debug\netcoreapp2.1\HttpHelper.pdb
+C:\Users\sankalpg\source\repos\DemoProject\DataBase\obj\Debug\netcoreapp2.1\DataBase.csproj.CopyComplete

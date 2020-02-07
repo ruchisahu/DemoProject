@@ -16,6 +16,8 @@ namespace FrontEnd.Controllers
     public class BugController : Controller
     {
         string Baseurl = "https://localhost:44339/";
+        HttpHelper.BugHttpClient helper = new HttpHelper.BugHttpClient("https://localhost:44339/", "api/Bug", "api/Bug/", "api/Bug/", "api/Bug/", "api/Bug/");
+
         // GET: Bug
         public async Task<IActionResult> Index()
         {
@@ -55,8 +57,9 @@ namespace FrontEnd.Controllers
             Bug Event = new Bug();
             try
             {
-            var response = await htpDetails(id.ToString());
-            dynamic json = JValue.Parse(response);
+           // var response = await htpDetails(id.ToString());
+                var response = await helper.Details(id.ToString());
+                dynamic json = JValue.Parse(response);
             // var jsonmessage = json.message;
 
             Event = JsonConvert.DeserializeObject<Bug>(json.ToString());
@@ -125,14 +128,14 @@ namespace FrontEnd.Controllers
                     value.TaskId = obj;
                     string postitem = JsonConvert.SerializeObject(value);
                     
-                        var response = await helperCreate(value.TaskId.ToString(), postitem);
+                        var response = await helper.Create(value.TaskId.ToString(), postitem);
                         receivedEvent = JsonConvert.DeserializeObject<Bug>(response);
                     return RedirectToAction("Index");
 
                 }
             return View(value);
         }
-        public async Task<String> helperCreate(String Id, String data)
+     /*   public async Task<String> helperCreate(String Id, String data)
         {
             String response = null;
             HttpClient client;
@@ -158,6 +161,7 @@ namespace FrontEnd.Controllers
 
             return response;
         }
+        */
 
         // GET: Bug/Edit/5
         public ActionResult Edit(int id)
@@ -204,7 +208,7 @@ namespace FrontEnd.Controllers
             {
                 // TODO: Add delete logic here
 
-                var res = await helperDelete(id);
+                var res = await helper.Delete(id);
             }
             catch (Exception ex)
             {
@@ -213,7 +217,7 @@ namespace FrontEnd.Controllers
             return View();
         }
 
-        public async Task<String> helperDelete(Guid? Id)
+      /*  public async Task<String> helperDelete(Guid? Id)
         {
 
             String response = null;
@@ -239,6 +243,7 @@ namespace FrontEnd.Controllers
 
             return response;
         }
+        */
 
 
 

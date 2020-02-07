@@ -72,7 +72,8 @@ namespace BusinessLogic.Controllers
             Bug Event = new Bug();
             try
             {
-                var response = await htpDetails(id.ToString());
+                 var response = await htpDetails(id.ToString());
+              //  var response = await helper.Details(id.ToString());
                 dynamic json = JValue.Parse(response);
                 // var jsonmessage = json.message;
 

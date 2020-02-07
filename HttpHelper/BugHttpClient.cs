@@ -22,7 +22,7 @@ namespace HttpHelper
         public BugHttpClient(String baseUrl, string getallEndPoint, string createEndpoint, string deleteEndpoint, string updateEndpoint, string detailEndpoint)
         {
             this.Baseurl = baseUrl;
-            this.apikey = apikey;
+           
             this.createEndpoint = createEndpoint;
             this.deleteEndpoint = deleteEndpoint;
             this.updateEndpoint = updateEndpoint;
@@ -31,10 +31,11 @@ namespace HttpHelper
 
             client = new HttpClient();
             client.BaseAddress = new Uri(baseUrl);
-            if (!String.IsNullOrEmpty(apikey))
+         /*   if (!String.IsNullOrEmpty(apikey))
             {
                 client.DefaultRequestHeaders.Add("X-API-KEY", apikey);
             }
+            */
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
         }
@@ -58,11 +59,13 @@ namespace HttpHelper
         }
         public async Task<String> Create(String Id, String data)
         {
+         
             String response = null;
+          
             try
             {
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                HttpResponseMessage Res = await client.PostAsync(createEndpoint + Id, content);
+                HttpResponseMessage Res = await client.PostAsync(createEndpoint, content);
 
                 if (Res.IsSuccessStatusCode)
                 {
@@ -77,7 +80,9 @@ namespace HttpHelper
 
             return response;
         }
-        public async Task<String> Delete(String Id)
+
+
+        public async Task<String> Delete(Guid? Id)
         {
 
             String response = null;
@@ -121,23 +126,25 @@ namespace HttpHelper
 
         public async Task<String> Details(string id)
         {
-            String response = null;
-            try
-            {
-                HttpResponseMessage Res = await client.GetAsync(detailEndpoint + id);
+               String response = null;
+               try
+               {
+                   HttpResponseMessage Res = await client.GetAsync("api/Bug/" + id);
 
-                if (Res.IsSuccessStatusCode)
-                {
-                    response = await Res.Content.ReadAsStringAsync();
-                }
+                   if (Res.IsSuccessStatusCode)
+                   {
+                       response = await Res.Content.ReadAsStringAsync();
+                   }
 
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Details failed with error " + ex.Message.ToString());
-            }
+               }
+               catch (Exception ex)
+               {
+                   throw new Exception("Details failed with error " + ex.Message.ToString());
+               }
 
-            return response;
+               return response;
+               
+       
 
         }
     }

@@ -12,3 +12,6 @@ C:\Users\sankalpg\source\repos\DemoProject\BusinessLogic\bin\Debug\netcoreapp2.1
 C:\Users\sankalpg\source\repos\DemoProject\BusinessLogic\obj\Debug\netcoreapp2.1\BusinessLogic.dll
 C:\Users\sankalpg\source\repos\DemoProject\BusinessLogic\obj\Debug\netcoreapp2.1\BusinessLogic.pdb
 C:\Users\sankalpg\source\repos\DemoProject\BusinessLogic\obj\Debug\netcoreapp2.1\BusinessLogic.csprojAssemblyReference.cache
+C:\Users\sankalpg\source\repos\DemoProject\BusinessLogic\bin\Debug\netcoreapp2.1\HttpHelper.dll
+C:\Users\sankalpg\source\repos\DemoProject\BusinessLogic\bin\Debug\netcoreapp2.1\HttpHelper.pdb
+C:\Users\sankalpg\source\repos\DemoProject\BusinessLogic\obj\Debug\netcoreapp2.1\BusinessLogic.csproj.CopyComplete
