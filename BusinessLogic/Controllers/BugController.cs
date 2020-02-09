@@ -48,8 +48,7 @@ namespace BusinessLogic.Controllers
                 return EmpInfo;
             }
             }
-        // https://localhost:44339/api/Bug/2da13d09-daf7-4f88-a9a7-5fd88f446df2
-
+        
         // GET: api/Bug/5
 
         [HttpGet("{id}", Name = "Get")]
@@ -67,10 +66,7 @@ namespace BusinessLogic.Controllers
             try
             {
                  var response = await htpDetails(id.ToString());
-              //  var response = await helper.Details(id.ToString());
-                dynamic json = JValue.Parse(response);
-                // var jsonmessage = json.message;
-
+                 dynamic json = JValue.Parse(response);
                 Event = JsonConvert.DeserializeObject<Bug>(json.ToString());
             }
             catch (Exception ex)

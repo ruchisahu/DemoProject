@@ -12,7 +12,7 @@ namespace DataBase.Model
         public System.Guid TaskId { get; set; }
         public string TaskName { get; set; }
         public System.DateTime CreatedAt { get; set; }
-        public Nullable<System.DateTime> CreatedBY { get; set; }
+        public string CreatedBY { get; set; }
         public string Status { get; set; }
         public string Severity { get; set; }
         public string AssignedBY { get; set; }

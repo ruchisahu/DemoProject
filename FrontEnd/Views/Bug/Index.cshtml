@@ -8,7 +8,7 @@
 <h2>Index</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Create New Bug</a>
 </p>
 
 <div class="row">
@@ -19,10 +19,10 @@
         <!-- <img src="~/images/2.jpg" alt="Card random image"> -->
 
         <div class="card-body">
-            <h4 class="card-title">@Html.DisplayFor(modelItem => item.AssignedBY)</h4>
-            <h5 class="card-subtitle">@Html.DisplayFor(modelItem => item.TaskName), @Html.DisplayFor(modelItem => item.Status)</h5>
+            <h4 class="card-title">@Html.DisplayFor(modelItem => item.TaskName)</h4>
+            <h5 class="card-subtitle">@Html.DisplayFor(modelItem => item.Severity), @Html.DisplayFor(modelItem => item.Status)</h5>
             <div style="height:100px">
-                <p class="card-text">@Html.DisplayFor(modelItem => item.Severity)</p>
+                <p class="card-text">@Html.DisplayFor(modelItem => item.AssignedBY),@Html.DisplayFor(modelItem => item.CreatedAt) </p>
             </div>
 
             <a asp-action="Edit" asp-route-id="@item.TaskId">Edit</a> |

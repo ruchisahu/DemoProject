@@ -12542,23 +12542,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\sankalpg\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\Ruchi.Sahu\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\sankalpg\\source\\repos\\DemoProject\\BusinessLogic\\BusinessLogic.csproj",
+      "projectUniqueName": "C:\\Users\\Ruchi.Sahu\\Documents\\dev\\DemoProject\\BusinessLogic\\BusinessLogic.csproj",
       "projectName": "BusinessLogic",
-      "projectPath": "C:\\Users\\sankalpg\\source\\repos\\DemoProject\\BusinessLogic\\BusinessLogic.csproj",
-      "packagesPath": "C:\\Users\\sankalpg\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\sankalpg\\source\\repos\\DemoProject\\BusinessLogic\\obj\\",
+      "projectPath": "C:\\Users\\Ruchi.Sahu\\Documents\\dev\\DemoProject\\BusinessLogic\\BusinessLogic.csproj",
+      "packagesPath": "C:\\Users\\Ruchi.Sahu\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Ruchi.Sahu\\Documents\\dev\\DemoProject\\BusinessLogic\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\sankalpg\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Ruchi.Sahu\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -12571,8 +12567,8 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "C:\\Users\\sankalpg\\source\\repos\\DemoProject\\HttpHelper\\HttpHelper.csproj": {
-              "projectPath": "C:\\Users\\sankalpg\\source\\repos\\DemoProject\\HttpHelper\\HttpHelper.csproj"
+            "C:\\Users\\Ruchi.Sahu\\Documents\\dev\\DemoProject\\HttpHelper\\HttpHelper.csproj": {
+              "projectPath": "C:\\Users\\Ruchi.Sahu\\Documents\\dev\\DemoProject\\HttpHelper\\HttpHelper.csproj"
             }
           }
         }
@@ -12598,6 +12594,7 @@
             "version": "[2.1.2, )"
           },
           "Microsoft.NETCore.App": {
+            "suppressParent": "All",
             "target": "Package",
             "version": "[2.1.0, )",
             "autoReferenced": true
@@ -12608,10 +12605,16 @@
           }
         },
         "imports": [
-          "net461"
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
         ],
         "assetTargetFallback": true,
-        "warn": true
+        "warn": true,
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
       }
     }
   }
