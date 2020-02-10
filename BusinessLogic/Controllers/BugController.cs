@@ -26,28 +26,21 @@ namespace BusinessLogic.Controllers
         [HttpGet]
         public async Task<List<Bug>> Get()
         {
-            List<Bug> EmpInfo = new List<Bug>();
-
-            using (var client = new HttpClient())
-            {
             
-                client.BaseAddress = new Uri(Baseurl);
-                client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage Res = await client.GetAsync("api/Bugs");
-
-              
-                if (Res.IsSuccessStatusCode)
-                { 
-                    var EmpResponse = Res.Content.ReadAsStringAsync().Result;
-
-                    EmpInfo = JsonConvert.DeserializeObject<List<Bug>>(EmpResponse);
-
-                }
-               
-                return EmpInfo;
+            List<Bug> BugInfo = new List<Bug>();
+            try
+            {
+                var Response = await helper.GetAllEvents();
+                BugInfo = JsonConvert.DeserializeObject<List<Bug>>(Response);
             }
+            catch (Exception ex)
+            {
+                //:todo show  eroor or shoa approrpaite view 
             }
+
+            return BugInfo;
+            }
+            
         
         // GET: api/Bug/5
 

@@ -22,39 +22,24 @@ namespace FrontEnd.Controllers
         public async Task<IActionResult> Index()
         {
             List<Bug> BugInfo = new List<Bug>();
-
-            using (var client = new HttpClient())
+            try
             {
-              
-                client.BaseAddress = new Uri(Baseurl);
-
-                client.DefaultRequestHeaders.Clear();
-                
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                //Sending request to find web api REST service resource GetAllbug using HttpClient  
-                HttpResponseMessage Res = await client.GetAsync("api/Bug");
-
-                //Checking the response is successful or not which is sent using HttpClient  
-                if (Res.IsSuccessStatusCode)
-                {
-                    //Storing the response details recieved from web api   
-                    var EmpResponse = Res.Content.ReadAsStringAsync().Result;
-
-                    //Deserializing the response recieved from web api and storing into the Employee list  
-                    BugInfo = JsonConvert.DeserializeObject<List<Bug>>(EmpResponse);
-
-                }
-                //returning the employee list to view  
-                return View(BugInfo);
+                var Response = await helper.GetAllEvents();
+                BugInfo = JsonConvert.DeserializeObject<List<Bug>>(Response);
             }
+            catch (Exception ex)
+            {
+                //:todo show  eroor or shoa approrpaite view 
+            }
+
+
+            return View(BugInfo);
+            
         }
 
-        
-        
             public async Task<Bug> GetDetail(Guid? id)
             {
-            Bug Event = new Bug();
+            Bug bug = new Bug();
             try
             {
            // var response = await htpDetails(id.ToString());
@@ -62,14 +47,14 @@ namespace FrontEnd.Controllers
                 dynamic json = JValue.Parse(response);
             // var jsonmessage = json.message;
 
-            Event = JsonConvert.DeserializeObject<Bug>(json.ToString());
+            bug = JsonConvert.DeserializeObject<Bug>(json.ToString());
             }
             catch (Exception ex)
             {
                 //:todo show  eroor or shoa approrpaite view 
             }
 
-            return Event;
+            return bug;
            
         }
         // GET: Bug/Details/5
