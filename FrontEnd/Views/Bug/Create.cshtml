@@ -4,7 +4,7 @@
     ViewData["Title"] = "Create";
 }
 
-<h2>Create</h2>
+h2>Add new Bug</h2>
 
 <h4>Bug</h4>
 <hr />
@@ -29,12 +29,24 @@
             </div>
             <div class="form-group">
                 <label asp-for="Status" class="control-label"></label>
-                <input asp-for="Status" class="form-control" />
+                <!--<input asp-for="Status" class="form-control" />-->
+                <select class="form-control" id="StudentGender" name="StudentGender">
+                    <option>Select Status</option>
+                    <option>Active</option>
+                    <option>Resolved</option>
+                    <option>Closed</option>
+                </select>
                 <span asp-validation-for="Status" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Severity" class="control-label"></label>
-                <input asp-for="Severity" class="form-control" />
+                <!--<input asp-for="Severity" class="form-control" />-->
+                <select class="form-control" id="StudentGender" name="StudentGender">
+                    <option>Select Severity</option>
+                    <option>Medium</option>
+                    <option>Critical</option>
+                    <option>low</option>
+                </select>
                 <span asp-validation-for="Severity" class="text-danger"></span>
             </div>
             <div class="form-group">
