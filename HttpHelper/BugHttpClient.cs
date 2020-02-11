@@ -129,7 +129,7 @@ namespace HttpHelper
                String response = null;
                try
                {
-                   HttpResponseMessage Res = await client.GetAsync("api/Bug/" + id);
+                   HttpResponseMessage Res = await client.GetAsync(detailEndpoint + id);
 
                    if (Res.IsSuccessStatusCode)
                    {

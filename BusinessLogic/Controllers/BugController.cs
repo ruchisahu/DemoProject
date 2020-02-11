@@ -26,28 +26,20 @@ namespace BusinessLogic.Controllers
         [HttpGet]
         public async Task<List<Bug>> Get()
         {
-            List<Bug> EmpInfo = new List<Bug>();
-
-            using (var client = new HttpClient())
+            List<Bug> BugInfo = new List<Bug>();
+            try
             {
+                var Response = await helper.GetAllEvents();
+                BugInfo = JsonConvert.DeserializeObject<List<Bug>>(Response);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("getDetails failed with error " + ex.Message.ToString());
+            }
+
+            return BugInfo;
+        }
             
-                client.BaseAddress = new Uri(Baseurl);
-                client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage Res = await client.GetAsync("api/Bugs");
-
-              
-                if (Res.IsSuccessStatusCode)
-                { 
-                    var EmpResponse = Res.Content.ReadAsStringAsync().Result;
-
-                    EmpInfo = JsonConvert.DeserializeObject<List<Bug>>(EmpResponse);
-
-                }
-               
-                return EmpInfo;
-            }
-            }
         
         // GET: api/Bug/5
 
@@ -65,7 +57,7 @@ namespace BusinessLogic.Controllers
             Bug Event = new Bug();
             try
             {
-                 var response = await htpDetails(id.ToString());
+                 var response = await helper.Details(id.ToString());
                  dynamic json = JValue.Parse(response);
                 Event = JsonConvert.DeserializeObject<Bug>(json.ToString());
             }
@@ -79,34 +71,7 @@ namespace BusinessLogic.Controllers
         }
 
 
-        public async Task<String> htpDetails(string id)
-        {
-            String response = null;
-            HttpClient client;
-            client = new HttpClient();
-            client.BaseAddress = new Uri(Baseurl);
-
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-
-            try
-            {
-                HttpResponseMessage Res = await client.GetAsync("api/Bugs/" + id);
-
-                if (Res.IsSuccessStatusCode)
-                {
-                    response = await Res.Content.ReadAsStringAsync();
-                }
-
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Details failed with error " + ex.Message.ToString());
-            }
-
-            return response;
-
-        }
+       
 
         // POST: api/Bug
         [HttpPost]
@@ -118,7 +83,7 @@ namespace BusinessLogic.Controllers
 
             try
             {
-                var response = await helperCreate(value.TaskId.ToString(), bugObject);
+                var response = await helper.Create(value.TaskId.ToString(), bugObject);
             }
             catch (Exception ex)
             {
@@ -128,32 +93,7 @@ namespace BusinessLogic.Controllers
             return Ok(value);
 
         }
-        public async Task<String> helperCreate(String Id, String data)
-        {
-            String response = null;
-            HttpClient client;
-            client = new HttpClient();
-            client.BaseAddress = new Uri(Baseurl);
-
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            try
-            {
-                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                HttpResponseMessage Res = await client.PostAsync("api/Bugs/", content);
-
-                if (Res.IsSuccessStatusCode)
-                {
-                    response = await Res.Content.ReadAsStringAsync();
-                }
-
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Create failed with error " + ex.Message.ToString());
-            }
-
-            return response;
-        }
+        
 
         // PUT: api/Bug/5
         [HttpPut("{id}")]
@@ -178,7 +118,7 @@ namespace BusinessLogic.Controllers
         {
             try
             {
-                var res = await helperDelete(id.ToString());
+                var res = await helper.Delete(id);
             }
             catch (Exception ex)
             {
@@ -186,32 +126,7 @@ namespace BusinessLogic.Controllers
             }
             return Ok();
         }
-        public async Task<String> helperDelete(String Id)
-        {
-
-            String response = null;
-            HttpClient client;
-            client = new HttpClient();
-            client.BaseAddress = new Uri(Baseurl);
-
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            try
-            {
-                HttpResponseMessage Res = await client.DeleteAsync("api/Bugs/" + Id);
-                if (Res.IsSuccessStatusCode)
-                {
-                    response = await Res.Content.ReadAsStringAsync();
-                }
-
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Delete failed with error " + ex.Message.ToString());
-            }
-
-            return response;
-        }
+       
 
     }
 }

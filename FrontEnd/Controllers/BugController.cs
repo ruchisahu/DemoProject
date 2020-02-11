@@ -23,31 +23,18 @@ namespace FrontEnd.Controllers
         {
             List<Bug> BugInfo = new List<Bug>();
 
-            using (var client = new HttpClient())
+            try
             {
-              
-                client.BaseAddress = new Uri(Baseurl);
-
-                client.DefaultRequestHeaders.Clear();
-                
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                //Sending request to find web api REST service resource GetAllbug using HttpClient  
-                HttpResponseMessage Res = await client.GetAsync("api/Bug");
-
-                //Checking the response is successful or not which is sent using HttpClient  
-                if (Res.IsSuccessStatusCode)
-                {
-                    //Storing the response details recieved from web api   
-                    var EmpResponse = Res.Content.ReadAsStringAsync().Result;
-
-                    //Deserializing the response recieved from web api and storing into the Employee list  
-                    BugInfo = JsonConvert.DeserializeObject<List<Bug>>(EmpResponse);
-
-                }
-                //returning the employee list to view  
-                return View(BugInfo);
+                var Response = await helper.GetAllEvents();
+                BugInfo = JsonConvert.DeserializeObject<List<Bug>>(Response);
             }
+            catch (Exception ex)
+            {
+                throw new Exception("Index failed with error " + ex.Message.ToString());
+            }
+
+            return View(BugInfo);
+            
         }
 
         
@@ -57,16 +44,16 @@ namespace FrontEnd.Controllers
             Bug Event = new Bug();
             try
             {
-           // var response = await htpDetails(id.ToString());
+           
                 var response = await helper.Details(id.ToString());
                 dynamic json = JValue.Parse(response);
-            // var jsonmessage = json.message;
+            
 
             Event = JsonConvert.DeserializeObject<Bug>(json.ToString());
             }
             catch (Exception ex)
             {
-                //:todo show  eroor or shoa approrpaite view 
+                throw new Exception("getDetails failed with error " + ex.Message.ToString());
             }
 
             return Event;
@@ -79,34 +66,7 @@ namespace FrontEnd.Controllers
 
             return View(Event);
         }
-        public async Task<String> htpDetails(string id)
-        {
-            String response = null;
-            HttpClient client;
-            client = new HttpClient();
-            client.BaseAddress = new Uri(Baseurl);
-          
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-        
-            try
-            {
-                HttpResponseMessage Res = await client.GetAsync("api/Bug/" + id);
-
-                if (Res.IsSuccessStatusCode)
-                {
-                    response = await Res.Content.ReadAsStringAsync();
-                }
-
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Details failed with error " + ex.Message.ToString());
-            }
-
-            return response;
-
-        }
+      
 
         // GET: Bug/Create
         public IActionResult Create()
@@ -121,7 +81,7 @@ namespace FrontEnd.Controllers
         {
             if (ModelState.IsValid)
             {
-                //  public async Task<ActionResult> Create([FromBody] Bug value)
+               
                 
                     Bug receivedEvent;
                     Guid obj = Guid.NewGuid();
@@ -159,26 +119,16 @@ namespace FrontEnd.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid? id, Bug bug)
         {
-            Bug receivedevent = new Bug();
-            using (var client = new HttpClient())
+          
+            string data = JsonConvert.SerializeObject(bug);
+
+            try
             {
-                client.BaseAddress = new Uri(Baseurl);
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                string postitem = JsonConvert.SerializeObject(bug);
-                StringContent content = new StringContent(postitem, Encoding.UTF8, "application/json");
-
-                using (var response = await client.PutAsync("/api/Bug/" + id, content))
-                {
-                    string apiResponse = await response.Content.ReadAsStringAsync();
-                    if (!response.IsSuccessStatusCode)
-                    {
-                        ViewBag.Message = apiResponse.ToString();
-                        return View("Status");
-                    }
-                  
-                    receivedevent = JsonConvert.DeserializeObject<Bug>(apiResponse);
-                }
+                var response = await helper.Edit(bug.TaskId.ToString(), data);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message.ToString() });
             }
             return View(bug);
         }
