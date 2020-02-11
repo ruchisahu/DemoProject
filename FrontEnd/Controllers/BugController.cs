@@ -30,7 +30,7 @@ namespace FrontEnd.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception("getDetails failed with error " + ex.Message.ToString());
+                throw new Exception("Index failed with error " + ex.Message.ToString());
             }
 
             return View(BugInfo);
@@ -44,16 +44,16 @@ namespace FrontEnd.Controllers
             Bug Event = new Bug();
             try
             {
-           // var response = await htpDetails(id.ToString());
+           
                 var response = await helper.Details(id.ToString());
                 dynamic json = JValue.Parse(response);
-            // var jsonmessage = json.message;
+            
 
             Event = JsonConvert.DeserializeObject<Bug>(json.ToString());
             }
             catch (Exception ex)
             {
-                //:todo show  eroor or shoa approrpaite view 
+                throw new Exception("getDetails failed with error " + ex.Message.ToString());
             }
 
             return Event;
@@ -66,34 +66,7 @@ namespace FrontEnd.Controllers
 
             return View(Event);
         }
-        public async Task<String> htpDetails(string id)
-        {
-            String response = null;
-            HttpClient client;
-            client = new HttpClient();
-            client.BaseAddress = new Uri(Baseurl);
-          
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-        
-            try
-            {
-                HttpResponseMessage Res = await client.GetAsync("api/Bug/" + id);
-
-                if (Res.IsSuccessStatusCode)
-                {
-                    response = await Res.Content.ReadAsStringAsync();
-                }
-
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Details failed with error " + ex.Message.ToString());
-            }
-
-            return response;
-
-        }
+      
 
         // GET: Bug/Create
         public IActionResult Create()
@@ -108,7 +81,7 @@ namespace FrontEnd.Controllers
         {
             if (ModelState.IsValid)
             {
-                //  public async Task<ActionResult> Create([FromBody] Bug value)
+               
                 
                     Bug receivedEvent;
                     Guid obj = Guid.NewGuid();
