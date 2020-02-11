@@ -119,26 +119,16 @@ namespace FrontEnd.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid? id, Bug bug)
         {
-            Bug receivedevent = new Bug();
-            using (var client = new HttpClient())
+          
+            string data = JsonConvert.SerializeObject(bug);
+
+            try
             {
-                client.BaseAddress = new Uri(Baseurl);
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                string postitem = JsonConvert.SerializeObject(bug);
-                StringContent content = new StringContent(postitem, Encoding.UTF8, "application/json");
-
-                using (var response = await client.PutAsync("/api/Bug/" + id, content))
-                {
-                    string apiResponse = await response.Content.ReadAsStringAsync();
-                    if (!response.IsSuccessStatusCode)
-                    {
-                        ViewBag.Message = apiResponse.ToString();
-                        return View("Status");
-                    }
-                  
-                    receivedevent = JsonConvert.DeserializeObject<Bug>(apiResponse);
-                }
+                var response = await helper.Edit(bug.TaskId.ToString(), data);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message.ToString() });
             }
             return View(bug);
         }
